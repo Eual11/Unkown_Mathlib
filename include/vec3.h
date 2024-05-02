@@ -1,0 +1,59 @@
+#pragma once
+#ifndef _UML_VEC3
+#define _UML_VEC3
+#include <cmath>
+#include <cstdio>
+#include <ostream>
+struct vec3 {
+
+  // default constructor
+  vec3() = default;
+
+  float x, y, z;
+  vec3(float a, float b, float c) {
+
+    x = a;
+    y = b;
+    z = c;
+  }
+
+  float &operator[](int i);
+
+  vec3 &operator+=(const vec3 &); // icrementing by another vecror
+  vec3 &operator-=(const vec3 &); // decrementing by another vecror
+  vec3 &operator/=(float);
+  vec3 &operator*=(float);
+  vec3 operator*(float);
+
+  bool operator==(const vec3 &a);
+  vec3 operator+(const vec3 &);
+  vec3 operator-(const vec3 &);
+
+  float operator*(const vec3 &); // dot product
+  float magnitude();
+  void normalize();
+};
+
+inline vec3 operator-(const vec3 &v) { return vec3(-v.x, -v.y, -v.z); }
+
+inline vec3 operator/(const vec3 &v, float s) {
+
+  float S = 1 / s;
+
+  return vec3(v.x * S, v.y * S, v.z * S);
+}
+inline float Magnitude(const vec3 &v) {
+  return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+inline vec3 Normalize(const vec3 &v) { return v / Magnitude(v); }
+inline std::ostream &operator<<(std::ostream &ost, vec3 vec) {
+  ost << "( " << vec.x << ", " << vec.y << ", " << vec.z << " )";
+
+  return ost;
+}
+
+// eual
+//  interactive
+//   game
+//: s
+#endif
