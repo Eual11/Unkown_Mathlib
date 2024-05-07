@@ -2,6 +2,8 @@
 
 float &vec2::operator[](int i) { return ((&x)[i]); }
 
+const float &vec2::operator[](int i) const { return ((&x)[i]); }
+
 vec2 &vec2::operator+=(const vec2 &v) {
 
   x += v.x;

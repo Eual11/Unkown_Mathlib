@@ -1,7 +1,7 @@
 #include "../include/vec4.h"
 
 float &vec4::operator[](int i) { return ((&x)[i]); }
-
+const float &vec4::operator[](int i) const { return ((&x)[i]); }
 vec4 &vec4::operator+=(const vec4 &v) {
 
   x += v.x;
