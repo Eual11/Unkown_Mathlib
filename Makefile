@@ -1,8 +1,8 @@
 COMPILE_FLAGS := -g -Wall -Wextra -std=c++17
 
-all: tests
+all: vectests mattests
 
-tests: testvec2 testvec3 testvec4
+vectests: testvec2 testvec3 testvec4
 testvec2: vec2
 	g++ $(COMPILE_FLAGS) ./tests/testvec2.cpp -L./lib -lvec2  -o ./build/$@ 
 
@@ -20,3 +20,16 @@ vec3:
 vec2:
 	g++ $(COMPILE_FLAGS) -c ./src/vec2.cpp -o ./bin/$@.o
 	ar rcs ./lib/lib$@.a ./bin/$@.o
+
+##tests for mat3x3
+
+mattests: testmat3x3
+
+testmat3x3: mat3x3
+			g++ $(COMPILE_FLAGS) ./tests/testmat3x3.cpp -L./lib -lmat3x3  -o ./build/$@
+mat3x3: vec3
+	g++  $(COMPILE_FLAGS) -L./lib  -c ./src/mat3x3.cpp -o ./bin/$@.o 
+	ar rcs ./lib/lib$@.a ./bin/$@.o ./bin/vec3.o
+
+
+
