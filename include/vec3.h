@@ -19,6 +19,7 @@ struct vec3 {
 
   float &operator[](int i);
 
+  const float &operator[](int i) const;
   vec3 &operator+=(const vec3 &); // icrementing by another vecror
   vec3 &operator-=(const vec3 &); // decrementing by another vecror
   vec3 &operator/=(float);
@@ -50,6 +51,10 @@ inline std::ostream &operator<<(std::ostream &ost, vec3 vec) {
   ost << "( " << vec.x << ", " << vec.y << ", " << vec.z << " )";
 
   return ost;
+}
+inline vec3 Cross(const vec3 &v1, const vec3 &v2) {
+  return vec3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z,
+              v1.x * v2.y - v1.y * v2.x);
 }
 
 // eual

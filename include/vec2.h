@@ -18,6 +18,7 @@ struct vec2 {
 
   float &operator[](int i);
 
+  const float &operator[](int i) const;
   vec2 &operator+=(const vec2 &); // icrementing by another vecror
   vec2 &operator-=(const vec2 &); // decrementing by another vecror
   vec2 &operator/=(float);
