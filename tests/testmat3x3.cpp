@@ -1,14 +1,11 @@
 #include "../include/mat3x3.h"
 
-int main(void) {
-  std::cout << "Hello World\n";
-
+void testMisc() {
   vec3 v1(1, 0, 0);
   vec3 v2(0, 1, 0);
   vec3 v3(0, 0, 1);
 
   mat3x3 mat3(v1, v2, v3);
-
   mat3x3 default_mat;
   default_mat.print_mat();
   mat3x3 another_mat{1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -30,6 +27,34 @@ int main(void) {
   (another_mat + mat3).print_mat();
 
   (another_mat / 2).print_mat();
+}
 
+void testMat3Mult() {
+
+  int testfailed = 0;
+  mat3x3 a{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  a.print_mat();
+  mat3x3 zm(0);
+  mat3x3 id{1, 0, 0, 0, 1, 0, 0, 0, 1};
+  mat3x3 az = a * zm;
+  if (!((az[0] == vec3(0, 0, 0)) && az[1] == vec3(0, 0, 0) &&
+        az[2] == vec3(0, 0, 0))) {
+    testfailed++;
+    printf("test failed\n");
+  }
+  mat3x3 aid = a * id;
+
+  aid.print_mat();
+
+  (a * a).print_mat();
+  if ((a * a).det() != a.det() * a.det()) {
+    testfailed++;
+    printf("test failed\n");
+  }
+  if (testfailed == 0)
+    printf("all tests passed\n");
+}
+int main(void) {
+  testMat3Mult();
   return 0;
 }
