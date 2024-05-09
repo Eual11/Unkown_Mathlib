@@ -16,6 +16,7 @@ private:
 public:
   mat3x3() = default;
   mat3x3(float, float, float, float, float, float, float, float, float);
+  mat3x3(float); // populate with a single element
 
   mat3x3(const vec3 &, const vec3 &, const vec3 &);
 
@@ -28,10 +29,13 @@ public:
   mat3x3 operator*(float);
   mat3x3 operator/(float);
   float det();
+  mat3x3 inverse();
+  // TODO: transpose should just return a new matrix
   void transpose();
   void print_mat();
 };
 
 float Determinant(const mat3x3 &);
-mat3x3 Transpose(mat3x3 &);
+mat3x3 Transpose(mat3x3);
+mat3x3 Inverse(mat3x3);
 #endif
