@@ -1,6 +1,6 @@
 #include "../include/mat2x2.h"
 
-// constructors
+// constructors and assignment operators
 mat2x2::mat2x2(float a) {
   m[0][0] = a;
   m[0][1] = a;
@@ -19,7 +19,23 @@ mat2x2::mat2x2(const vec2 &v1, const vec2 &v2) {
   m[1][0] = v2.x;
   m[1][1] = v2.y;
 }
+mat2x2::mat2x2(const mat2x2 &n) {
 
+  m[0][0] = n[0][0];
+  m[0][1] = n[0][1];
+  m[1][0] = n[1][0];
+  m[1][1] = n[1][1];
+}
+mat2x2 &mat2x2::operator=(const mat2x2 &n) {
+
+  if (this != &n) {
+    m[0][0] = n[0][0];
+    m[0][1] = n[0][1];
+    m[1][0] = n[1][0];
+    m[1][1] = n[1][1];
+  }
+  return *this;
+}
 // access
 //
 vec2 &mat2x2::operator[](int i) {

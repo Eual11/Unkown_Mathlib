@@ -13,7 +13,8 @@ private:
 
 public:
   mat2x2() = default;
-  mat2x2(const mat2x2 &) = default;
+  mat2x2(const mat2x2 &);
+  mat2x2 &operator=(const mat2x2 &);
   mat2x2(float, float, float, float);
   mat2x2(float);
   mat2x2(const vec2 &, const vec2 &);

@@ -26,6 +26,32 @@ mat3x3::mat3x3(float a) {
   m[2][1] = a;
   m[2][2] = a;
 }
+mat3x3::mat3x3(const mat3x3 &n) {
+  m[0][0] = n[0][0];
+  m[0][1] = n[0][1];
+  m[0][2] = n[0][2];
+  m[1][0] = n[1][0];
+  m[1][1] = n[1][1];
+  m[1][2] = n[1][2];
+  m[2][0] = n[2][0];
+  m[2][1] = n[2][1];
+  m[2][2] = n[2][2];
+}
+mat3x3 &mat3x3::operator=(const mat3x3 &n) {
+
+  if (this != &n) {
+    m[0][0] = n[0][0];
+    m[0][1] = n[0][1];
+    m[0][2] = n[0][2];
+    m[1][0] = n[1][0];
+    m[1][1] = n[1][1];
+    m[1][2] = n[1][2];
+    m[2][0] = n[2][0];
+    m[2][1] = n[2][1];
+    m[2][2] = n[2][2];
+  }
+  return *this;
+}
 
 mat3x3::mat3x3(const vec3 &v1, const vec3 &v2, const vec3 &v3) {
   m[0][0] = v1.x;
@@ -137,6 +163,24 @@ mat2x2 mat3x3::minor(int _i, int _j) {
   }
   return mnr;
 }
+void mat3x3::inverse() {
+  assert(det() != 0);
+  auto cofactor = [&](int i, int j) {
+    if ((i + j) % 2)
+      return -minor(i, j).det();
+    else
+      return minor(i, j).det();
+  };
+  mat3x3 adj = {
+
+      cofactor(0, 0), cofactor(0, 1), cofactor(0, 2),
+      cofactor(1, 0), cofactor(1, 1), cofactor(1, 2),
+      cofactor(2, 0), cofactor(2, 1), cofactor(2, 2)};
+
+  adj.transpose();
+  mat3x3 inv = adj / det();
+  *this = inv;
+}
 
 float mat3x3::det() {
   return m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
@@ -194,12 +238,12 @@ mat3x3 Inverse(mat3x3 &m) {
     else
       return m.minor(i, j).det();
   };
-  mat3x3 inv = {
+  mat3x3 adj = {
 
       cofactor(0, 0), cofactor(0, 1), cofactor(0, 2),
       cofactor(1, 0), cofactor(1, 1), cofactor(1, 2),
       cofactor(2, 0), cofactor(2, 1), cofactor(2, 2)};
 
-  inv.transpose();
-  return inv / m.det();
+  adj.transpose();
+  return adj / m.det();
 }

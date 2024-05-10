@@ -16,6 +16,8 @@ private:
 
 public:
   mat3x3() = default;
+  mat3x3(const mat3x3 &);
+  mat3x3 &operator=(const mat3x3 &);
   mat3x3(float, float, float, float, float, float, float, float, float);
   mat3x3(float); // populate with a single element
 
@@ -30,7 +32,7 @@ public:
   mat3x3 operator*(float);
   mat3x3 operator/(float);
   float det();
-  mat3x3 inverse();
+  void inverse();
   void transpose();
   void print_mat();
   mat2x2 minor(int _i, int _j);
