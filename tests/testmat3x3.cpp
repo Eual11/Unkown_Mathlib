@@ -55,6 +55,12 @@ void testMat3Mult() {
     printf("all tests passed\n");
 }
 int main(void) {
-  testMat3Mult();
+
+  mat3x3 a{2, 2, 4, 5, 6, 7, 8, 9, 10};
+
+  mat3x3 f = a * Inverse(a);
+  Inverse(a).print_mat();
+  f.print_mat();
+
   return 0;
 }

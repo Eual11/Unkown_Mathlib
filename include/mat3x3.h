@@ -1,5 +1,6 @@
 #ifndef _UML_MAT3X3
 #define _UML_MAT3X3
+#include "mat2x2.h"
 #include "vec3.h"
 #include <iostream>
 // struct representing 3x3 matrices
@@ -30,12 +31,13 @@ public:
   mat3x3 operator/(float);
   float det();
   mat3x3 inverse();
-  // TODO: transpose should just return a new matrix
   void transpose();
   void print_mat();
+  mat2x2 minor(int _i, int _j);
 };
 
 float Determinant(const mat3x3 &);
-mat3x3 Transpose(mat3x3);
-mat3x3 Inverse(mat3x3);
+mat3x3 Transpose(const mat3x3 &);
+mat3x3 Inverse(mat3x3 &m);
+mat2x2 Minor(const mat3x3 &m, int _i, int _j);
 #endif

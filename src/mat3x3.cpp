@@ -1,4 +1,5 @@
 #include "../include/mat3x3.h"
+#include <cmath>
 
 mat3x3::mat3x3(float n00, float n01, float n02, float n10, float n11, float n12,
                float n20, float n21, float n22
@@ -120,6 +121,23 @@ void mat3x3::transpose() {
   m[2][2] = v3[2];
 }
 
+mat2x2 mat3x3::minor(int _i, int _j) {
+  mat2x2 mnr;
+
+  int k = 0;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (i != _i && j != _j)
+
+      {
+        mnr[k / 2][k % 2] = m[i][j];
+        k++;
+      }
+    }
+  }
+  return mnr;
+}
+
 float mat3x3::det() {
   return m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
          m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
@@ -148,4 +166,40 @@ mat3x3 Transpose(mat3x3 m) {
   m[2][2] = v3[2];
 
   return m;
+}
+mat2x2 Minor(const mat3x3 &m, int _i, int _j) {
+
+  mat2x2 mnr;
+
+  int k = 0;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (i != _i && j != _j)
+
+      {
+        mnr[k / 2][k % 2] = m[i][j];
+        k++;
+      }
+    }
+  }
+  return mnr;
+}
+
+mat3x3 Inverse(mat3x3 &m) {
+
+  assert(m.det() != 0);
+  auto cofactor = [&](int i, int j) {
+    if ((i + j) % 2)
+      return -m.minor(i, j).det();
+    else
+      return m.minor(i, j).det();
+  };
+  mat3x3 inv = {
+
+      cofactor(0, 0), cofactor(0, 1), cofactor(0, 2),
+      cofactor(1, 0), cofactor(1, 1), cofactor(1, 2),
+      cofactor(2, 0), cofactor(2, 1), cofactor(2, 2)};
+
+  inv.transpose();
+  return inv / m.det();
 }
