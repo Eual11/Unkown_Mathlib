@@ -8,6 +8,8 @@ struct vec2 {
 
   // default constructor
   vec2() = default;
+  vec2(const vec2 &) = default;
+  vec2 &operator=(const vec2 &) = default;
 
   float x, y, z;
   vec2(float a, float b) {

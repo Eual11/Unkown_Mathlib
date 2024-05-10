@@ -8,7 +8,8 @@ struct vec3 {
 
   // default constructor
   vec3() = default;
-
+  vec3(const vec3 &) = default;
+  vec3 &operator=(const vec3 &) = default;
   float x, y, z;
   vec3(float a, float b, float c) {
 
