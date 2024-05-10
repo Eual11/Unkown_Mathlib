@@ -57,9 +57,4 @@ void testMat2Mult() {
   if (testfailed == 0)
     printf("all tests passed\n");
 }
-int main(void) {
-
-  mat2x2 a{1, 2, 3, 4};
-  (a * Inverse(a)).print_mat();
-  return 0;
-}
+int main(void) { return 0; }
