@@ -2,8 +2,11 @@
 #include <atomic>
 #include <cassert>
 #include <cstdlib>
+#include <initializer_list>
 #include <iostream>
+#include <stdexcept>
 #include <stdlib.h>
+#include <vector>
 
 int testVecAddition() {
   int testCount = 100;
@@ -162,11 +165,36 @@ void testAll() {
 
   std::cout << "vec3: All Tests Passed \n";
 }
+struct triangle {
+  vec3 p[3];
+  triangle(std::initializer_list<vec3> vals) {
+    if (vals.size() != 3)
+      throw new std::invalid_argument("invalid arg");
+    auto it = vals.begin();
+    p[0] = *it++;
+    p[1] = *it++;
+    p[2] = *it;
+  }
+};
+struct mesh {
+  std::vector<triangle> tris;
+};
+;
 
 int main() {
 
-  vec3 x(1, 2, 3);
-  vec3({1, 2, 3});
+  triangle tr({{1, 2, 3}, {1, 2, 3}, {1, 2, 3}});
+  mesh cube;
 
+  cube.tris = {{{0, 0, 0}, {0, 1, 0}, {0, 0, 1}},
+               {{1, 0, 0}, {1, 1, 0}, {0, 1, 1}}};
+  for (auto tri : cube.tris) {
+    printf("(%f, %f, %f)\n", tri.p[0].x, tri.p[0].y, tri.p[0].z);
+    printf("(%f, %f, %f)\n", tri.p[1].x, tri.p[1].y, tri.p[1].z);
+    printf("(%f, %f, %f)\n", tri.p[2].x, tri.p[2].y, tri.p[2].z);
+    printf("/////////////// \n");
+  }
+  /* cube.tris = {{{0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}}};
+   */
   return 0;
 }

@@ -1,9 +1,12 @@
 #pragma once
 #ifndef _UML_VEC4
 #define _UML_VEC4
+#include "vec3.h"
 #include <cmath>
 #include <cstdio>
 #include <ostream>
+
+struct mat4x4;
 struct vec4 {
 
   // default constructor
@@ -11,6 +14,7 @@ struct vec4 {
   vec4(const vec4 &) = default;
   vec4 &operator=(const vec4 &) = default;
   vec4(std::initializer_list<float>);
+  vec4(const vec3 &, float);
 
   float x, y, z, w;
   vec4(float a, float b, float c, float d) {
@@ -34,6 +38,7 @@ struct vec4 {
   vec4 operator-(const vec4 &);
 
   float operator*(const vec4 &); // dot product
+  vec4 operator*(const mat4x4 &);
   float magnitude();
   void normalize();
 };

@@ -56,18 +56,12 @@ void testMat3Mult() {
 }
 int main(void) {
 
-  mat3x3 a{2, 2, 4, 5, 6, 7, 8, 9, 10};
+  vec3 a{1, 2, 3};
+  mat3x3 m{{4, 5, 6}, {6, 5, 4}, {4, 6, 5}};
+  vec3 r = a * m;
 
-  printf("inv a: \n");
-  Inverse(a).print_mat();
-  mat3x3 b(a);
-  b.inverse();
-  printf("b: \n");
-  b.print_mat();
-  printf("a: \n");
-  a.print_mat();
-  mat3x3 f = a * b;
-  f.print_mat();
+  printf("(%f, %f, %f)\n", r.x, r.y, r.z);
 
+  //
   return 0;
 }

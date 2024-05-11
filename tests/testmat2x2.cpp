@@ -57,4 +57,13 @@ void testMat2Mult() {
   if (testfailed == 0)
     printf("all tests passed\n");
 }
-int main(void) { return 0; }
+int main(void) {
+
+  vec2 a{1, 2};
+  mat2x2 b{1, 3, 4, 5};
+
+  vec2 c = a * b;
+
+  printf("(%f, %f)\n", c.x, c.y);
+  return 0;
+}

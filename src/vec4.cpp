@@ -11,6 +11,12 @@ vec4 &vec4::operator+=(const vec4 &v) {
 
   return *(this);
 }
+vec4::vec4(const vec3 &v, float _w) {
+  x = v.x;
+  y = v.y;
+  z = v.z;
+  w = _w;
+}
 vec4::vec4(std::initializer_list<float> vals) {
   auto it = vals.begin();
   x = *it++;

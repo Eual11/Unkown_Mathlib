@@ -69,6 +69,13 @@ mat2x2 mat2x2::operator*(const mat2x2 &n) {
 
   return r;
 }
+vec2 vec2::operator*(const mat2x2 &m) {
+  vec2 r;
+
+  r.x = m[0][0] * x + m[1][0] * y;
+  r.y = m[0][1] * x + m[1][1] * y;
+  return r;
+}
 mat2x2 mat2x2::operator/(float S) {
   float s = 1 / S;
   return mat2x2{s * m[0][0], s * m[0][1], s * m[1][0], s * m[1][1]};

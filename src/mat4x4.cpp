@@ -217,6 +217,16 @@ void mat4x4::print_mat() {
   }
 }
 
+vec4 vec4::operator*(const mat4x4 &m) {
+  vec4 r;
+
+  r.x = m[0][0] * x + m[1][0] * y + m[2][0] * z + m[3][0] * w;
+  r.y = m[0][1] * x + m[1][1] * y + m[2][1] * z + m[3][1] * w;
+  r.z = m[0][2] * x + m[1][2] * y + m[2][2] * z + m[3][2] * w;
+  r.w = m[0][3] * x + m[1][3] * y + m[2][3] * z + m[3][3] * w;
+  return r;
+}
+
 mat3x3 mat4x4::minor(int _i, int _j) const {
   mat3x3 mnr;
 

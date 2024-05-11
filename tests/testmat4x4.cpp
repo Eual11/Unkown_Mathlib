@@ -59,18 +59,25 @@ void testMat3Mult() {
 }
 int main(void) {
 
-  mat4x4 a{1, 5, 3, 5, 5, 6, 7, 8, 9, 0, 11, 2, 13, 14, 15, 16};
+  /* mat4x4 a{1, 5, 3, 5, 5, 6, 7, 8, 9, 0, 11, 2, 13, 14, 15, 16}; */
+  /**/
+  /* printf("inv a: \n"); */
+  /* mat4x4 b(a); */
+  /* b.inverse(); */
+  /* printf("b: \n"); */
+  /* b.print_mat(); */
+  /* printf("a: \n"); */
+  /* a.print_mat(); */
+  /* printf("id: \n"); */
+  /* mat4x4 f = a * b; */
+  /* f.print_mat(); */
+  /**/
 
-  printf("inv a: \n");
-  mat4x4 b(a);
-  b.inverse();
-  printf("b: \n");
-  b.print_mat();
-  printf("a: \n");
-  a.print_mat();
-  printf("id: \n");
-  mat4x4 f = a * b;
-  f.print_mat();
+  vec4 a{1, 2, 3, 4};
 
+  mat4x4 m{{1, 2, 3, 7}, {3, 2, 1, 12}, {1, 2, 3, 9}, {8, 2, 1, 9}};
+  vec4 f = a * m;
+
+  printf("(%f, %f, %f, %f\n)", f.x, f.y, f.z, f.w);
   return 0;
 }

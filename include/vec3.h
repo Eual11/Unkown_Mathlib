@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstdio>
 #include <ostream>
+struct mat3x3;
 struct vec3 {
 
   // default constructor
@@ -33,6 +34,7 @@ struct vec3 {
   vec3 operator+(const vec3 &);
   vec3 operator-(const vec3 &);
 
+  vec3 operator*(const mat3x3 &);
   float operator*(const vec3 &); // dot product
   float magnitude();
   void normalize();
@@ -49,6 +51,7 @@ inline vec3 operator/(const vec3 &v, float s) {
 inline float Magnitude(const vec3 &v) {
   return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 }
+
 inline vec3 Normalize(const vec3 &v) { return v / Magnitude(v); }
 inline std::ostream &operator<<(std::ostream &ost, vec3 vec) {
   ost << "( " << vec.x << ", " << vec.y << ", " << vec.z << " )";

@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstdio>
 #include <ostream>
+struct mat2x2;
 struct vec2 {
 
   // default constructor
@@ -14,7 +15,7 @@ struct vec2 {
 
   vec2(std::initializer_list<float>);
 
-  float x, y, z;
+  float x, y;
   vec2(float a, float b) {
 
     x = a;
@@ -35,6 +36,7 @@ struct vec2 {
   vec2 operator-(const vec2 &);
 
   float operator*(const vec2 &); // dot product
+  vec2 operator*(const mat2x2 &);
   float magnitude();
   void normalize();
 };

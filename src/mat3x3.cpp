@@ -37,6 +37,7 @@ mat3x3::mat3x3(const mat3x3 &n) {
   m[2][1] = n[2][1];
   m[2][2] = n[2][2];
 }
+
 mat3x3 &mat3x3::operator=(const mat3x3 &n) {
 
   if (this != &n) {
@@ -162,6 +163,16 @@ mat2x2 mat3x3::minor(int _i, int _j) {
     }
   }
   return mnr;
+}
+
+vec3 vec3::operator*(const mat3x3 &m) {
+  vec3 r;
+
+  r.x = m[0][0] * x + m[1][0] * y + m[2][0] * z;
+  r.y = m[0][1] * x + m[1][1] * y + m[2][1] * z;
+  r.z = m[0][2] * x + m[1][2] * y + m[2][2] * z;
+
+  return r;
 }
 void mat3x3::inverse() {
   assert(det() != 0);
