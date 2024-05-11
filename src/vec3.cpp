@@ -1,4 +1,5 @@
 #include "../include/vec3.h"
+#include <initializer_list>
 float &vec3::operator[](int i) { return ((&x)[i]); }
 const float &vec3::operator[](int i) const { return ((&x)[i]); }
 vec3 &vec3::operator+=(const vec3 &v) {
@@ -8,6 +9,13 @@ vec3 &vec3::operator+=(const vec3 &v) {
   z += v.z;
 
   return *(this);
+}
+
+vec3::vec3(std::initializer_list<float> vals) {
+  auto it = vals.begin();
+  x = *it++;
+  y = *it++;
+  z = *it;
 }
 
 vec3 &vec3::operator-=(const vec3 &v) {

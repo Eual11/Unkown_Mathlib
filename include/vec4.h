@@ -10,6 +10,7 @@ struct vec4 {
   vec4() = default;
   vec4(const vec4 &) = default;
   vec4 &operator=(const vec4 &) = default;
+  vec4(std::initializer_list<float>);
 
   float x, y, z, w;
   vec4(float a, float b, float c, float d) {

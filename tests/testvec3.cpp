@@ -165,6 +165,8 @@ void testAll() {
 
 int main() {
 
-  testAll();
+  vec3 x(1, 2, 3);
+  vec3({1, 2, 3});
+
   return 0;
 }

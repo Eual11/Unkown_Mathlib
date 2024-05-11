@@ -155,6 +155,6 @@ void testAll() {
 
 int main() {
 
-  testAll();
+  vec2({1, 2, 3});
   return 0;
 }

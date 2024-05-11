@@ -11,6 +11,11 @@ vec2 &vec2::operator+=(const vec2 &v) {
 
   return *(this);
 }
+vec2::vec2(std::initializer_list<float> vals) {
+  auto it = vals.begin();
+  x = *it++;
+  y = *it;
+}
 
 vec2 &vec2::operator-=(const vec2 &v) {
   x -= v.x;

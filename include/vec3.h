@@ -1,4 +1,5 @@
 #pragma once
+#include <initializer_list>
 #ifndef _UML_VEC3
 #define _UML_VEC3
 #include <cmath>
@@ -17,6 +18,7 @@ struct vec3 {
     y = b;
     z = c;
   }
+  vec3(std::initializer_list<float>);
 
   float &operator[](int i);
 

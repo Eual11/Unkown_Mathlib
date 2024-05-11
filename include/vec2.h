@@ -1,4 +1,5 @@
 #pragma once
+#include <initializer_list>
 #ifndef _UML_VEC2
 #define _UML_VEC2
 #include <cmath>
@@ -10,6 +11,8 @@ struct vec2 {
   vec2() = default;
   vec2(const vec2 &) = default;
   vec2 &operator=(const vec2 &) = default;
+
+  vec2(std::initializer_list<float>);
 
   float x, y, z;
   vec2(float a, float b) {
