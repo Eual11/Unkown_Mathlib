@@ -23,8 +23,11 @@ vec2:
 
 ##tests for mat3x3 and mat2x2
 
-mattests: testmat3x3 testmat2x2
+mattests: testmat3x3 testmat2x2 testmat4x4
 
+
+testmat4x4:mat4x4 mat3x3
+			g++ $(COMPILE_FLAGS) ./tests/testmat4x4.cpp -L./lib -lmat4x4 -lvec2  -o ./build/$@
 testmat3x3: mat3x3 mat2x2
 			g++ $(COMPILE_FLAGS) ./tests/testmat3x3.cpp -L./lib -lmat3x3  -o ./build/$@
 testmat2x2:mat2x2
@@ -35,7 +38,9 @@ mat3x3: vec3 mat2x2
 mat2x2:
 	g++  $(COMPILE_FLAGS) -L./lib  -c ./src/mat2x2.cpp -o ./bin/$@.o 
 	ar rcs ./lib/lib$@.a ./bin/$@.o ./bin/vec2.o
-
+mat4x4: vec4 mat3x3
+	g++  $(COMPILE_FLAGS) -L./lib  -c ./src/mat4x4.cpp -o ./bin/$@.o 
+	ar rcs ./lib/lib$@.a ./bin/$@.o ./bin/vec4.o ./bin/mat3x3.o ./bin/mat2x2.o ./bin/vec3.o 
 
 
 
