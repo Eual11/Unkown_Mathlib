@@ -226,7 +226,13 @@ vec4 vec4::operator*(const mat4x4 &m) {
   r.w = m[0][3] * x + m[1][3] * y + m[2][3] * z + m[3][3] * w;
   return r;
 }
+vec3 vec3::operator*(const mat4x4 &m) {
+  vec4 mvec = {*this, 1};
 
+  mvec = mvec * m;
+
+  return vec3{mvec.x, mvec.y, mvec.z};
+}
 mat3x3 mat4x4::minor(int _i, int _j) const {
   mat3x3 mnr;
 

@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <ostream>
 struct mat3x3;
+struct mat4x4;
 struct vec3 {
 
   // default constructor
@@ -35,6 +36,7 @@ struct vec3 {
   vec3 operator-(const vec3 &);
 
   vec3 operator*(const mat3x3 &);
+  vec3 operator*(const mat4x4 &m);
   float operator*(const vec3 &); // dot product
   float magnitude();
   void normalize();
@@ -63,8 +65,4 @@ inline vec3 Cross(const vec3 &v1, const vec3 &v2) {
               v1.x * v2.y - v1.y * v2.x);
 }
 
-// eual
-//  interactive
-//   game
-//: s
 #endif
