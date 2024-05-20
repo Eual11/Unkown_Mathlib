@@ -131,3 +131,35 @@ mat4x4 ClipPrespective(float aspectRatio, float fov, float zNear, float zFar) {
   m[3][2] = -zNear * lamba;
   return m;
 }
+
+mat4x4 PointAt(vec3 position, vec3 target, vec3 up) {
+
+  vec3 forward = target - position;
+  forward.normalize();
+
+  vec3 newup = up - forward * (forward * up);
+  newup.normalize();
+
+  vec3 right = Cross(newup, forward);
+  //clang-format off
+  return {right.x,    right.y,    right.z,    0,         newup.x,   newup.y,
+          newup.z,    0,          forward.x,  forward.y, forward.z, 0,
+          position.x, position.y, position.z, 1};
+}
+
+mat4x4 LookAt(vec3 position, vec3 target, vec3 up) {
+
+  vec3 forward = target - position;
+  forward.normalize();
+
+  vec3 newup = up - forward * (forward * up);
+  newup.normalize();
+
+  vec3 right = Cross(newup, forward);
+  //clang-format off
+  mat4x4 m = {right.x,    right.y,    right.z,    0,         newup.x,   newup.y,
+              newup.z,    0,          forward.x,  forward.y, forward.z, 0,
+              position.x, position.y, position.z, 1};
+  m.inverse();
+  return m;
+}

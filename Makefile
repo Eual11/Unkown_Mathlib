@@ -1,6 +1,6 @@
 COMPILE_FLAGS := -g -Wall -Wextra -std=c++17
 
-all: vectests mattests transform
+all: vectests mattests transform utils
 
 vectests: testvec2 testvec3 testvec4
 testvec2: vec2
@@ -23,6 +23,10 @@ vec2:
 transform:
 	g++ $(COMPILE_FLAGS) -c ./src/transform.cpp -o ./bin/$@.o
 	ar rcs ./lib/libuml$@.a ./bin/$@.o
+utils:
+	g++ $(COMPILE_FLAGS) -c ./src/utils.cpp -o ./bin/$@.o
+	ar rcs ./lib/libuml$@.a ./bin/$@.o
+
 
 
 ##tests for mat3x3 and mat2x2
@@ -46,6 +50,9 @@ mat4x4: vec4 mat3x3
 	g++  $(COMPILE_FLAGS) -L./lib  -c ./src/mat4x4.cpp -o ./bin/$@.o 
 	ar rcs ./lib/libuml$@.a ./bin/$@.o ./bin/vec4.o ./bin/mat3x3.o ./bin/mat2x2.o ./bin/vec3.o 
 
+
+testUtils: utils 
+		g++ $(COMPILE_FLAGS) ./tests/testUtils.cpp -L./lib -lumlmat4x4 -lumlvec3 -lumlutils  -o ./build/$@
 install:
 	mkdir -p ${CPLUS_INCLUDE_PATH}/uml
 	cp -f ./include/* "${CPLUS_INCLUDE_PATH}/uml"
