@@ -1,6 +1,6 @@
 COMPILE_FLAGS := -g -Wall -Wextra -std=c++17
 
-all: vectests mattests
+all: vectests mattests transform
 
 vectests: testvec2 testvec3 testvec4
 testvec2: vec2
@@ -20,6 +20,10 @@ vec3:
 vec2:
 	g++ $(COMPILE_FLAGS) -c ./src/vec2.cpp -o ./bin/$@.o
 	ar rcs ./lib/libuml$@.a ./bin/$@.o
+transform:
+	g++ $(COMPILE_FLAGS) -c ./src/transform.cpp -o ./bin/$@.o
+	ar rcs ./lib/libuml$@.a ./bin/$@.o
+
 
 ##tests for mat3x3 and mat2x2
 
@@ -27,7 +31,7 @@ mattests: testmat3x3 testmat2x2 testmat4x4
 
 
 testmat4x4:mat4x4 mat3x3
-			g++ $(COMPILE_FLAGS) ./tests/testmat4x4.cpp -L./lib -lumlmat4x4 -lumlvec2  -o ./build/$@
+			g++ $(COMPILE_FLAGS) ./tests/testInverse.cpp -L./lib -lumlmat4x4 -lumlvec2  -o ./build/$@
 testmat3x3: mat3x3 mat2x2
 			g++ $(COMPILE_FLAGS) ./tests/testmat3x3.cpp -L./lib -lumlmat3x3  -o ./build/$@
 testmat2x2:mat2x2
