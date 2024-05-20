@@ -48,5 +48,6 @@ mat4x4 ClipOrthogonal(float aspectRatio, float fov, float zNear, float zFar);
 mat4x4 ClipPrespective(float aspectRatio, float fov, float zNear, float zFar);
 
 // view transforms
-
+mat4x4 PointAt(vec3 position, vec3 target, vec3 up);
+mat4x4 LookAt(vec3 position, vec3 target, vec3 up);
 #endif
