@@ -1,4 +1,4 @@
-COMPILE_FLAGS := -g -Wall -Wextra -std=c++17
+COMPILE_FLAGS := -g -Wall -Wextra -std=c++17 -O3
 
 all: vectests mattests transform utils
 
