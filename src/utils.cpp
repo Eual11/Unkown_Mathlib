@@ -8,10 +8,7 @@ vec3 LineIntersectPlane(vec3 plane_n, vec3 plane_p, vec3 linestart,
   float plane_d = plane_n * plane_p;
   float ad = plane_n * linestart;
   float bd = plane_n * linend;
-  if (abs(bd - ad) == 0.0f) {
-    // No intersection
-    return vec3(NAN, NAN, NAN);
-  }
+
   float t = (plane_d - ad) / (bd - ad);
 
   vec3 w = linend - linestart;

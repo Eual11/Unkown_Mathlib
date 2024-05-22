@@ -120,7 +120,7 @@ int main(int argc, char **agrv) {
   vec3 opnt = {-0.500557, 0.119180, 1.001124};
   vec3 pnt = LineIntersectPlane({1.0, 0.0, 0.0}, {-0.5, 0.0, 0.0}, inpnt, opnt);
   vec3 c = opnt - inpnt;
-  printf("Change: (%f, %f, %f)\n", c.x, c.y, c.z);
+  printf("Change: (%f, %f, %f)\n", pnt.x, pnt.y, pnt.z);
   printf("intresection: (%f, %f, %f)\n", pnt.x, pnt.y, pnt.z);
   return 0;
 }
