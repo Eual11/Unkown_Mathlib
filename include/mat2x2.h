@@ -8,8 +8,7 @@
 
 struct mat2x2 {
 
-private:
-  float m[2][2];
+  float m[2][2] = {0};
 
 public:
   mat2x2() = default;

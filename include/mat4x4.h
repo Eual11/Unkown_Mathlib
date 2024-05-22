@@ -5,8 +5,7 @@
 #include "vec4.h"
 #include <iostream>
 struct mat4x4 {
-private:
-  float m[4][4];
+  float m[4][4] = {0};
 
 public:
   // constructors

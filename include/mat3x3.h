@@ -11,8 +11,7 @@ struct mat3x3 {
 
   // trivial constructor
 
-private:
-  float m[3][3];
+  float m[3][3] = {0};
 
 public:
   mat3x3() = default;
