@@ -21,18 +21,18 @@ mat2x2::mat2x2(const vec2 &v1, const vec2 &v2) {
 }
 mat2x2::mat2x2(const mat2x2 &n) {
 
-  m[0][0] = n[0][0];
-  m[0][1] = n[0][1];
-  m[1][0] = n[1][0];
-  m[1][1] = n[1][1];
+  m[0][0] = n.m[0][0];
+  m[0][1] = n.m[0][1];
+  m[1][0] = n.m[1][0];
+  m[1][1] = n.m[1][1];
 }
 mat2x2 &mat2x2::operator=(const mat2x2 &n) {
 
   if (this != &n) {
-    m[0][0] = n[0][0];
-    m[0][1] = n[0][1];
-    m[1][0] = n[1][0];
-    m[1][1] = n[1][1];
+    m[0][0] = n.m[0][0];
+    m[0][1] = n.m[0][1];
+    m[1][0] = n.m[1][0];
+    m[1][1] = n.m[1][1];
   }
   return *this;
 }
@@ -48,12 +48,12 @@ const vec2 &mat2x2::operator[](int i) const {
 }
 // basic operatons
 mat2x2 mat2x2::operator+(const mat2x2 &n) {
-  return mat2x2{m[0][0] + n[0][0], m[0][1] + n[0][1], m[1][0] + n[1][0],
-                m[1][1] + n[1][1]};
+  return mat2x2{m[0][0] + n.m[0][0], m[0][1] + n.m[0][1], m[1][0] + n.m[1][0],
+                m[1][1] + n.m[1][1]};
 }
 mat2x2 mat2x2::operator-(const mat2x2 &n) {
-  return mat2x2{m[0][0] - n[0][0], m[0][1] - n[0][1], m[1][0] - n[1][0],
-                m[1][1] - n[1][1]};
+  return mat2x2{m[0][0] - n.m[0][0], m[0][1] - n.m[0][1], m[1][0] - n.m[1][0],
+                m[1][1] - n.m[1][1]};
 }
 mat2x2 mat2x2::operator*(float s) {
   return mat2x2{s * m[0][0], s * m[0][1], s * m[1][0], s * m[1][1]};
@@ -61,19 +61,19 @@ mat2x2 mat2x2::operator*(float s) {
 mat2x2 mat2x2::operator*(const mat2x2 &n) {
 
   mat2x2 r;
-  r[0][0] = m[0][0] * n[0][0] + m[0][1] * n[1][0];
-  r[0][1] = m[0][0] * n[0][1] + m[0][1] * n[1][1];
+  r.m[0][0] = m[0][0] * n.m[0][0] + m[0][1] * n.m[1][0];
+  r.m[0][1] = m[0][0] * n.m[0][1] + m[0][1] * n.m[1][1];
 
-  r[1][0] = m[1][0] * n[0][0] + m[1][1] * n[1][0];
-  r[1][1] = m[1][0] * n[0][1] + m[1][1] * n[1][1];
+  r.m[1][0] = m[1][0] * n.m[0][0] + m[1][1] * n.m[1][0];
+  r.m[1][1] = m[1][0] * n.m[0][1] + m[1][1] * n.m[1][1];
 
   return r;
 }
 vec2 vec2::operator*(const mat2x2 &m) {
   vec2 r;
 
-  r.x = m[0][0] * x + m[1][0] * y;
-  r.y = m[0][1] * x + m[1][1] * y;
+  r.x = m.m[0][0] * x + m.m[1][0] * y;
+  r.y = m.m[0][1] * x + m.m[1][1] * y;
   return r;
 }
 mat2x2 mat2x2::operator/(float S) {
@@ -104,24 +104,24 @@ void mat2x2::print_mat() {
 void mat2x2::inverse() {
   mat2x2 adj{m[1][1], -m[0][1], -m[1][0], m[0][0]};
   mat2x2 mat = adj / adj.det();
-  m[0][0] = mat[0][0];
-  m[0][1] = mat[0][1];
-  m[1][0] = mat[1][0];
-  m[1][1] = mat[1][1];
+  m[0][0] = mat.m[0][0];
+  m[0][1] = mat.m[0][1];
+  m[1][0] = mat.m[1][0];
+  m[1][1] = mat.m[1][1];
 }
 
 float Determinant(const mat2x2 &m) {
-  return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+  return m.m[0][0] * m.m[1][1] - m.m[0][1] * m.m[1][0];
 }
 mat2x2 Transpose(const mat2x2 &m) {
   mat2x2 tmp(m);
-  tmp[0][1] = m[1][0];
-  tmp[1][0] = m[0][1];
+  tmp.m[0][1] = m.m[1][0];
+  tmp.m[1][0] = m.m[0][1];
   return tmp;
 }
 mat2x2 Inverse(const mat2x2 &m) {
 
-  mat2x2 adj{m[1][1], -m[0][1], -m[1][0], m[0][0]};
+  mat2x2 adj{m.m[1][1], -m.m[0][1], -m.m[1][0], m.m[0][0]};
 
   return adj / adj.det();
 }
