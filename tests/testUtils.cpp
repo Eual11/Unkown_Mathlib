@@ -109,9 +109,18 @@ void test_PointPlaneDistance() {
 }
 
 int main(int argc, char **agrv) {
-  testIntresection();
-  test_LineIntersectPlane();
-  test_PointPlaneDistance();
-
+  /* testIntresection(); */
+  /* test_LineIntersectPlane(); */
+  /* test_PointPlaneDistance(); */
+  /* Invertex: (-0.321787, -0.119180, 1.001124) */
+  /* outvertex: (-0.500557, 0.119180, 1.001124) */
+  /* Plane_n: (1.000000, 0.000000, 0.000000) */
+  /* Plane_p: (-0.500000, 0.000000, 0.000000) */
+  vec3 inpnt = {-0.321787, -0.119180, 1.001124};
+  vec3 opnt = {-0.500557, 0.119180, 1.001124};
+  vec3 pnt = LineIntersectPlane({1.0, 0.0, 0.0}, {-0.5, 0.0, 0.0}, inpnt, opnt);
+  vec3 c = opnt - inpnt;
+  printf("Change: (%f, %f, %f)\n", c.x, c.y, c.z);
+  printf("intresection: (%f, %f, %f)\n", pnt.x, pnt.y, pnt.z);
   return 0;
 }
