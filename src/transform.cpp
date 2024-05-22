@@ -1,79 +1,168 @@
 #include "../include/transform.h"
 #include <cmath>
 
-mat2x2 IdentityMat2x2() { return {1, 0, 0, 1}; }
-mat3x3 IdentityMat3xe() { return {1, 0, 0, 0, 1, 0, 0, 0, 1}; }
-mat4x4 IdentityMat4x4() {
+mat2x2 IdentityMat2x2() {
+  mat2x2 m;
 
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+
+  return m;
+}
+mat3x3 IdentityMat3xe() {
+  mat3x3 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+
+  return m;
+}
+mat4x4 IdentityMat4x4() {
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+
+  return m;
 }
 
 mat4x4 ScaleUniform(float s) {
 
-  return {s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = s;
+  m.m[1][1] = s;
+  m.m[2][2] = s;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 mat4x4 ScaleX(float xs) {
-  return {xs, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = xs;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 mat4x4 ScaleY(float ys) {
-  return {1, 0, 0, 0, 0, ys, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = ys;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 
 mat4x4 ScaleZ(float zs) {
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, zs, 0, 0, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = zs;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 mat4x4 ScaleXYZ(float xs, float ys, float zs) {
-  return {xs, 0, 0, 0, 0, ys, 0, 0, 0, 0, zs, 0, 0, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = xs;
+  m.m[1][1] = ys;
+  m.m[2][2] = zs;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 mat4x4 ScaleAxis(vec3 n, float k) {
   n.normalize();
-  return mat4x4{1 + (k - 1) * n.x * n.x,
-                (k - 1) * n.x * n.y,
-                (k - 1) * n.x * n.z,
-                0,
-                (k - 1) * n.x * n.y,
-                1 + (k - 1) * n.y * n.y,
-                (k - 1) * n.z * n.y,
-                0,
-                (k - 1) * n.x * n.z,
-                (k - 1) * n.y * n.z,
-                1 + (k - 1) * n.z * n.z,
-                0,
-                0,
-                0,
-                0,
-                1};
+  mat4x4 m;
+  m.m[0][0] = 1 + (k - 1) * n.x * n.x;
+  m.m[0][1] = (k - 1) * n.x * n.y;
+  m.m[0][2] = (k - 1) * n.x * n.z;
+
+  m.m[1][0] = (k - 1) * n.x * n.y;
+  m.m[1][1] = 1 + (k - 1) * n.y * n.y;
+  m.m[1][2] = (k - 1) * n.z * n.y;
+
+  m.m[2][0] = (k - 1) * n.x * n.z;
+  m.m[2][1] = (k - 1) * n.y * n.z;
+  m.m[2][2] = 1 + (k - 1) * n.z * n.z;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 mat4x4 TranslateX(float xt) {
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, xt, 0, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  m.m[3][0] = xt;
+  return m;
 }
 mat4x4 TranslateY(float yt) {
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, yt, 0, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  m.m[3][1] = yt;
+  return m;
 }
 mat4x4 TranslateZ(float zt) {
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, zt, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  m.m[3][2] = zt;
+  return m;
 }
 mat4x4 TranslateXYZ(float xt, float yt, float zt) {
-  return {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, xt, yt, zt, 1};
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = 1.0f;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
+  m.m[3][0] = xt;
+  m.m[3][1] = yt;
+  m.m[3][2] = zt;
+  return m;
 }
 
 mat4x4 RotateX(float theta) {
   float ct = cos(theta);
   float st = sin(theta);
+  mat4x4 m;
+  m.m[0][0] = 1.0f;
+  m.m[1][1] = ct;
+  m.m[1][2] = st;
+  m.m[2][1] = -st;
+  m.m[2][2] = ct;
+  m.m[3][3] = 1;
 
-  return {1, 0, 0, 0, 0, ct, st, 0, 0, -st, ct, 0, 0, 0, 0, 1};
+  return m;
 }
 mat4x4 RotateY(float theta) {
   float ct = cos(theta);
   float st = sin(theta);
+  mat4x4 m;
+  m.m[0][0] = ct;
+  m.m[0][2] = -st;
+  m.m[1][1] = 1.0f;
+  m.m[2][0] = st;
+  m.m[2][2] = ct;
+  m.m[3][3] = 1.0f;
 
-  return {ct, 0, -st, 0, 0, 1, 0, 0, st, 0, ct, 0, 0, 0, 0, 1};
+  return m;
 }
 mat4x4 RotateZ(float theta) {
   float ct = cos(theta);
   float st = sin(theta);
+  mat4x4 m;
+  m.m[0][0] = ct;
+  m.m[0][1] = st;
+  m.m[1][0] = -st;
+  m.m[1][1] = ct;
+  m.m[2][2] = 1.0f;
+  m.m[3][3] = 1.0f;
 
-  return {ct, st, 0, 0, -st, ct, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+  return m;
 }
 mat4x4 RotateAxis(vec3 n, float t) {
   n.normalize();
@@ -81,54 +170,46 @@ mat4x4 RotateAxis(vec3 n, float t) {
   float c = 1 - cos(t);
   float ct = cos(t);
   float st = sin(t);
+  mat4x4 m;
+  m.m[0][0] = n.x * n.x * c + ct;
+  m.m[0][1] = n.x * n.y * c + n.z * st;
+  m.m[0][2] = n.x * n.z * c - n.y * st;
 
-  return {n.x * n.x * c + ct,
-          n.x * n.y * c + n.z * st,
-          n.x * n.z * c - n.y * st,
-          0,
+  m.m[1][0] = n.x * n.y * c - n.z * st;
+  m.m[1][1] = n.y * n.y * c + ct;
+  m.m[1][2] = n.z * n.y * c + n.x * st;
 
-          n.x * n.y * c - n.z * st,
-          n.y * n.y * c + ct,
-          n.z * n.y * c + n.x * st,
-          0,
-
-          n.x * n.z * c + n.y * st,
-          n.y * n.z * c - n.x * st,
-          n.z * n.z * c + ct,
-          0,
-
-          0,
-          0,
-          0,
-          1
-
-  };
+  m.m[2][0] = n.x * n.z * c + n.y * st;
+  m.m[2][1] = n.y * n.z * c - n.x * st;
+  m.m[2][2] = n.z * n.z * c + ct;
+  m.m[3][3] = 1.0f;
+  return m;
 }
 
 mat4x4 RotateEuler(float fYaw, float fPitch, float fRoll) {
   return RotateY(fYaw) * RotateX(fPitch) * RotateZ(fRoll);
 }
 mat4x4 ClipOrthogonal(float aspectRatio, float fov, float zNear, float zFar) {
-  mat4x4 m{0};
+  mat4x4 m;
   float zoom = 1.0 / tan(fov / 2);
   float lamba = zFar / (zFar - zNear);
-  m[0][0] = aspectRatio * zoom;
-  m[1][1] = zoom;
-  m[2][2] = lamba;
-  m[3][2] = -zNear * lamba;
-  m[3][3] = 1;
+  m.m[0][0] = aspectRatio * zoom;
+  m.m[1][1] = zoom;
+  m.m[2][2] = lamba;
+  m.m[3][2] = -zNear * lamba;
+  m.m[3][3] = 1;
 
   return m;
 }
 mat4x4 ClipPrespective(float aspectRatio, float fov, float zNear, float zFar) {
-  mat4x4 m{0};
+  mat4x4 m;
   float zoom = 1.0 / tan(fov / 2);
   float lamba = zFar / (zFar - zNear);
-  m[0][0] = aspectRatio * zoom;
-  m[1][1] = zoom;
-  m[2][2] = lamba;
-  m[2][3] = 1;
-  m[3][2] = -zNear * lamba;
+  m.m[0][0] = aspectRatio * zoom;
+  m.m[1][1] = zoom;
+  m.m[2][2] = lamba;
+  m.m[2][3] = 1;
+  m.m[3][2] = -zNear * lamba;
   return m;
 }
 
@@ -157,9 +238,25 @@ mat4x4 LookAt(vec3 position, vec3 target, vec3 up) {
 
   vec3 right = Cross(newup, forward);
   //clang-format off
-  mat4x4 m = {right.x,    right.y,    right.z,    0,         newup.x,   newup.y,
-              newup.z,    0,          forward.x,  forward.y, forward.z, 0,
-              position.x, position.y, position.z, 1};
-  m.inverse();
-  return m;
+  mat4x4 mat;
+  mat.m[0][0] = right.x;
+  mat.m[1][0] = right.y;
+  mat.m[2][0] = right.z;
+
+  mat.m[0][1] = newup.x;
+  mat.m[1][1] = newup.y;
+  mat.m[2][1] = newup.z;
+
+  mat.m[0][2] = forward.x;
+  mat.m[1][2] = forward.y;
+  mat.m[2][2] = forward.z;
+  float tx = -position * right;
+  float ty = -position * newup;
+  float tz = -position * forward;
+
+  mat.m[3][0] = tx;
+  mat.m[3][1] = ty;
+  mat.m[3][2] = tz;
+  mat.m[3][3] = 1.0f;
+  return mat;
 }

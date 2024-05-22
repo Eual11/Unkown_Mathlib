@@ -53,10 +53,13 @@ float vec3::magnitude() { return sqrtf(x * x + y * y + z * z); }
 
 void vec3::normalize() {
 
-  float absv = magnitude();
-  x /= absv;
-  y /= absv;
-  z /= absv;
+  float absv = sqrtf(x * x + y * y + z * z);
+
+  if (absv != 0.0f) {
+    x /= absv;
+    y /= absv;
+    z /= absv;
+  }
 }
 
 bool vec3::operator==(const vec3 &v) {

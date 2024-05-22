@@ -25,9 +25,9 @@ vec2 &vec2::operator-=(const vec2 &v) {
 }
 
 vec2 &vec2::operator/=(float s) {
-
-  x /= s;
-  y /= s;
+  float S = 1 / s;
+  x *= S;
+  y *= S;
 
   return *(this);
 }
@@ -49,9 +49,12 @@ float vec2::magnitude() { return sqrtf(x * x + y * y); }
 
 void vec2::normalize() {
 
-  float absv = magnitude();
-  x /= absv;
-  y /= absv;
+  float absv = sqrtf(x * x + y * y);
+  if (absv != 0.0) {
+
+    x /= absv;
+    y /= absv;
+  }
 }
 
 bool vec2::operator==(const vec2 &v) { return (x == v.x && y == v.y); }

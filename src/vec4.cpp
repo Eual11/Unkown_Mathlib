@@ -69,11 +69,13 @@ float vec4::magnitude() { return sqrtf(x * x + y * y + z * z + w * w); }
 
 void vec4::normalize() {
 
-  float absv = magnitude();
-  x /= absv;
-  y /= absv;
-  z /= absv;
-  w /= absv;
+  float absv = sqrtf(x * x + y * y + z * z + w * w);
+  if (absv != 0.0f) {
+    x /= absv;
+    y /= absv;
+    z /= absv;
+    w /= absv;
+  }
 }
 
 bool vec4::operator==(const vec4 &v) {
