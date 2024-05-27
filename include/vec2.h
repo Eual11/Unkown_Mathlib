@@ -34,6 +34,8 @@ struct vec2 {
   bool operator==(const vec2 &a);
   vec2 operator+(const vec2 &);
   vec2 operator-(const vec2 &);
+  // component wise product
+  vec2 operator&(const vec2 &);
 
   float operator*(const vec2 &); // dot product
   vec2 operator*(const mat2x2 &);
@@ -51,6 +53,9 @@ inline vec2 operator/(const vec2 &v, float s) {
 }
 inline float Magnitude(const vec2 &v) { return sqrtf(v.x * v.x + v.y * v.y); }
 inline vec2 Normalize(const vec2 &v) { return v / Magnitude(v); }
+inline vec2 Schur_Product(const vec2 &v1, const vec2 &v2) {
+  return vec2{v1.x * v2.x, v1.y * v2.y};
+}
 inline std::ostream &operator<<(std::ostream &ost, vec2 vec) {
   ost << "( " << vec.x << ", " << vec.y << " )";
 

@@ -38,6 +38,7 @@ struct vec3 {
   vec3 operator*(const mat3x3 &);
   vec3 operator*(const mat4x4 &m);
   float operator*(const vec3 &); // dot product
+  vec3 operator&(const vec3 &);  // component wise product
   float magnitude();
   void normalize();
 };
@@ -63,6 +64,12 @@ inline std::ostream &operator<<(std::ostream &ost, vec3 vec) {
 inline vec3 Cross(const vec3 &v1, const vec3 &v2) {
   return vec3(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z,
               v1.x * v2.y - v1.y * v2.x);
+}
+// componentwise product, TODO: find a better name
+inline vec3 Schur_Product(const vec3 &v1, const vec3 &v2) {
+  return vec3{v1.x * v2.x, v1.y * v2.y, v1.z * v2.z
+
+  };
 }
 
 #endif

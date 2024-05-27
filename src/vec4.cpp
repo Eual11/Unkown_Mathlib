@@ -57,6 +57,9 @@ vec4 vec4::operator+(const vec4 &v) {
   return vec4(x + v.x, y + v.y, z + v.z, w + v.w);
 }
 vec4 vec4::operator*(float f) { return vec4(x * f, y * f, z * f, w * f); }
+vec4 vec4::operator&(const vec4 &v) {
+  return vec4{v.x * x, v.y * y, v.z * z, v.w * w};
+}
 vec4 vec4::operator-(const vec4 &v) {
   return vec4(x - v.x, y - v.y, z - v.z, w - v.w);
 }

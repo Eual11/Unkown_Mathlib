@@ -48,7 +48,7 @@ vec3 vec3::operator*(float f) { return vec3(x * f, y * f, z * f); }
 vec3 vec3::operator-(const vec3 &v) { return vec3(x - v.x, y - v.y, z - v.z); }
 
 float vec3::operator*(const vec3 &v) { return (x * v.x + y * v.y + z * v.z); }
-
+vec3 vec3::operator&(const vec3 &v) { return vec3{v.x * x, v.y * y, v.z * z}; }
 float vec3::magnitude() { return sqrtf(x * x + y * y + z * z); }
 
 void vec3::normalize() {

@@ -36,8 +36,8 @@ struct vec4 {
   bool operator==(const vec4 &a);
   vec4 operator+(const vec4 &);
   vec4 operator-(const vec4 &);
-
   float operator*(const vec4 &); // dot product
+  vec4 operator&(const vec4 &);  // component wise vector product
   vec4 operator*(const mat4x4 &);
   float magnitude();
   void normalize();
@@ -55,6 +55,11 @@ inline float Magnitude(const vec4 &v) {
   return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 }
 inline vec4 Normalize(const vec4 &v) { return v / Magnitude(v); }
+inline vec4 Schur_Product(const vec4 &v1, const vec4 &v2) {
+  return vec4{v1.x * v2.x, v1.y * v2.y, v1.z * v2.z, v1.w * v2.w
+
+  };
+}
 inline std::ostream &operator<<(std::ostream &ost, vec4 vec) {
   ost << "( " << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w
       << " )";
